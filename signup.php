@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     include 'index1.php';
-
+    $not = false;
     $em = $_POST["email"];
     $uname = $_POST["fullname"];
     $pass = $_POST["password"];
@@ -9,6 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     if ($pass == $cpass) {
         $sql = "INSERT INTO `signup` (`name`, `email`, `pass`, `conf-pass`) VALUES ('$uname', '$em', '$pass', '$cpass')";
         $res = mysqli_query($conn, $sql);
+    }
+    if ($res) {
+        echo 'Data inserted successfully';
+    } else {
+        echo 'Error: ' . mysqli_error($conn);
     }
 }
 ?>
@@ -39,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
             <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
 
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Enter your email address" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter a strong password" required>
