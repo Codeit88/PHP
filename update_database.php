@@ -19,14 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql2 = "UPDATE users SET users.Password = '$pass' WHERE id ='$my_id'";
         $sql3 = "UPDATE users SET Confirm_Pass = '$confp' WHERE id ='$my_id'";
         // if ($uname != $row['name'])
-        $exec1 = mysqli_query($conn, $sql);
-        // if ($num != $row['phone_number'])
-        $exec2 = mysqli_query($conn, $sql1);
-        //  if ($pass != $row['Password']  && $pass == $confp) {
-        $exec3 = mysqli_query($conn, $sql2);
-        $exec4 = mysqli_query($conn, $sql3);
-        //   }
-        $er1 = true;
+
+        if ($pass == $confp) {
+            $exec1 = mysqli_query($conn, $sql);
+            // if ($num != $row['phone_number'])
+            $exec2 = mysqli_query($conn, $sql1);
+
+            $exec3 = mysqli_query($conn, $sql2);
+            $exec4 = mysqli_query($conn, $sql3);
+            $er1 = true;
+        } else
+            $er2 = true;
     } else
         $er2 = true;
 }
